@@ -1,4 +1,4 @@
- name: Deploy Packer Locally
+name: Deploy Packer Locally
  
 on:
   push:
