@@ -25,4 +25,4 @@ jobs:
  
     - name: Build Packer Image
       run: |
-        packer build -on-error=ask -var-file Packer/variables.pkrvars100GBdisk.hcl -var-file Packer/vsphere.pkrvars.hcl Packer/ubuntu-22.04.pkr.hcl
+        packer build -on-error=ask -var-file variables.pkrvars100GBdisk.hcl -var-file vsphere.pkrvars.hcl ubuntu-22.04.pkr.hcl
