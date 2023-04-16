@@ -8,7 +8,7 @@ on:
     - Packer/ubuntu22.04-server-vmware
  
 jobs:
-  packer:
+  packer-ubuntu22.04:
     runs-on: ubuntu-latest
  
     steps:
@@ -26,3 +26,4 @@ jobs:
     - name: Build Packer Image
       run: |
         packer build -on-error=ask -var-file variables.pkrvars100GBdisk.hcl -var-file vsphere.pkrvars.hcl ubuntu-22.04.pkr.hcl
+      working-directory: ./Packer/ubuntu22.04-server-vmware
