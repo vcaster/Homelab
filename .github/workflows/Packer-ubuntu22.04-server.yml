@@ -1,11 +1,11 @@
-name: Deploy Packer Locally
+name: Deploy ubuntu22.04-server Locally
  
 on:
   push:
     branches:
       - main
     paths:
-    - Packer
+    - Packer/ubuntu22.04-server-vmware
  
 jobs:
   packer:
