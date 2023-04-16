@@ -1,0 +1,77 @@
+---
+- hosts: all
+  become_user: root
+  become: true
+  tasks:
+    - name: Install packages
+      apt:
+        update_cache: yes
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+          - unzip
+      register: result
+      until: result is not failed
+      retries: 5
+      delay: 5
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu jammy stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+    - name: Install Docker module for Python
+      pip:
+        name: docker
+    - name: Pull the Jenkins Docker image
+      docker_image:
+        name: "samgabrail/jenkins-tf-vault-ansible:latest"
+        source: pull
+        state: present
+        force_source: yes
+    - name: Change file ownership, group and permissions
+      file:
+        path: /home/ubuntu/jenkins_data
+        state: directory
+        recurse: yes
+        owner: ubuntu
+        group: ubuntu
+    - name: add docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+    - name: Create Jenkins container
+      docker_container:
+        name: "jenkins"
+        image: "samgabrail/jenkins-tf-vault-ansible:latest"
+        state: started
+        ports:
+          - "8080:8080"
+          - "50000:50000"
+        volumes:
+          - /home/ubuntu/jenkins_data:/var/jenkins_home
+    - name: Create .ssh directory
+      file: state=directory path=/home/ubuntu/jenkins_data/.ssh
+    - name: Copy the Private SSH Key for Jenkins to vSphere VMs
+      copy:
+        src: /home/kali/.ssh/id_rsa
+        dest: /home/ubuntu/jenkins_data/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode: 0400
