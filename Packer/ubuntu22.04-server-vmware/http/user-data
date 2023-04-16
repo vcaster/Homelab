@@ -1,0 +1,35 @@
+#cloud-config
+autoinstall:
+    version: 1
+    early-commands:
+        # workaround to stop ssh for packer as it thinks it timed out
+        - sudo systemctl stop ssh
+    locale: en_US
+    keyboard:
+        layout: en
+        variant: us
+    packages: [open-vm-tools, openssh-server, net-tools, perl, open-iscsi, ntp, curl, vim, ifupdown, zip, unzip, gnupg2, software-properties-common, apt-transport-https, ca-certificates, lsb-release, python3-pip, jq, nano, git, build-essential, gcc]
+    network:
+        network:
+            version: 2
+            ethernets:
+                ens192:
+                    dhcp4: true
+    identity:
+        hostname: ubuntu22.04
+        username: ubuntu
+        password: "$6$rounds=4096$1xr/yEHPJuLI85eC$LVJXHwCregSPPzOpFbbBSpHmwQ8J0Z70Gr/Djcl41YKjK/MjZWoUWrSJcQ7IgQLSSjSAyefX6M9k1AXZf0JC.0"
+    ssh:
+        install-server: yes
+        allow-pw: no
+        authorized-keys:
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCTZi2El4jTsSFi+aBYipBX1njhiye9nBq0VC0N5GR1fzZkp2zQW2xnw8T0mhRkinTZ9Fu3KgCd1aDTmj6hf5WGBKkqDvQC0i4mOiNsbJHlxX/2hckMu2MesrgjR3XfEZlVzQ1UxHSYD+4pkSeSuzpZWzJPiHxeZFCAGyH+SUPdI+5ReSVMWw2gpVfPKCKO63rZsf490DOmL2SdKM0fkbTGHjwwP9fxA8Yus8RhmrCDpnlKMEVKyIqUM+kk+1Bh1Yq58r/mfPfB8s0+oe2K0SfiBGbLXmKtodP4pgIkmx116KC3XY7mYehhtD6gCRoG9rsUTgeZvSSA++xT3dTeOyO8yHnGV3uhi9987he+KV4T+b5WUrkyjeBsZLyG8MuLai7APMuLx3UXtbt/bPWQQdgGKW5lKEWT1atruP7gXbuDWDRrA0y2a4NP6gBrc3uf5TuIUN3lSi+FCtOSFMELdBDSUzPbbhS8rdIAx25yjzqYhBdcC2GBrM5T4RxVBqtg0M= kali@kali
+            - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKvw1x+YO5wQ33cd8+irxIuNYPBsrCWWlABfUsjfDlhiN8zrOS1m3QwNW1xj04VXo7xw5VwyWWLuOZa2FZ0DhhDsp14vh+SPt9uK5yYFxydX/waL+/eQ4W3MBg/JGnXopzpBYsbX45TETZytxLvGKJISUmWAeqLza8wu7M0cPtfewmB9Rs8pQfwRVoxuH4RbF5a81TWlQTYPAuuFE7wj+9hln0zOIFlGKZPhu3K/SmXbrKs1ldwvUYRytHGm3FpuNg1D4tLbdUWvWDjI3eFdvNsmd3ffyoBRPaxM5m6yeHNW6lR05Gr79GHyE6eKImZpNFVMZ3ViyTL3KNiqMCBE8H kali@kali
+    storage:
+        layout:
+            name: lvm
+    user-data:
+        disable_root: false
+    late-commands:
+        - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
+        - curtin in-target --target=/target -- chmod 440 /etc/sudoers.d/ubuntu
