@@ -1,0 +1,11 @@
+---
+- name: Install GitHub Actions Runner
+  hosts: all
+  user: ubuntu
+  become: yes
+  vars:
+    - github_account: vcaster
+    - github_repo: Homelab
+  roles:
+    - role: monolithprojects.github_actions_runner
+

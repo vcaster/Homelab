@@ -1,0 +1,5 @@
+[all:children]
+gh_runner
+
+[gh_runner]
+gh_runner_vm ansible_host=10.10.2.3

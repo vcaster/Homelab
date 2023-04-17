@@ -1,9 +1,12 @@
-name: 'Terraform'
+name: 'Deploy Terraform'
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
+    branches: 
+      - main
+    paths:
+    - Terraform
+  # pull_request:
 
 permissions:
   contents: read
@@ -11,8 +14,9 @@ permissions:
 jobs:
   terraform:
     name: 'Terraform'
-    runs-on: ubuntu-latest
-    environment: production
+    runs-on: gh-runner
+    # runs-on: ubuntu-latest
+    # environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -31,17 +35,21 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
+      working-directory: ./Terraform
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
+    # - name: Terraform Format
+    #   run: terraform fmt -check
+    #   working-directory: ./Terraform
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
+      working-directory: ./Terraform
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
+      # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
+    #   working-directory: ./Terraform

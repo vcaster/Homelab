@@ -17,3 +17,6 @@ ipv4_netmask           = "16"
 ubuntu22-04-test                = "ubuntu22-04-test"
 ubuntu22-04-test-ipv4_address   = "10.10.2.2"
 ubuntu2204-server-template-name = "Ubuntu-2204-Template-100GB-Thin"
+
+gh-runner                = "gh-runner"
+gh-runner-ipv4_address   = "10.10.2.3"

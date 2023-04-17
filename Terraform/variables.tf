@@ -136,3 +136,17 @@ variable "ubuntu22-04-test-ipv4_address" {
   type = string
   description = "ipv4 addresses for a vm"
 }
+
+#================================#
+# VMware vSphere gh-runner#
+#================================#
+
+variable "gh-runner" {
+  type        = string
+  description = "The name of the vSphere virtual machines and the hostname of the machine"
+}
+
+variable "gh-runner-ipv4_address" {
+  type = string
+  description = "ipv4 addresses for a vm"
+}
