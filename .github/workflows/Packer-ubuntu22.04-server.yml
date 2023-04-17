@@ -8,22 +8,23 @@ on:
     - Packer/ubuntu22.04-server-vmware
  
 jobs:
-  packer-ubuntu22.04:
+  packer-ubuntu22-04-server:
     runs-on: ubuntu-latest
  
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
  
-    - name: Install Packer
+    - name: Install Packer and packages
       run: |
         sudo apt-get update
-        sudo apt-get install -y unzip wget
-        wget https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip
-        unzip packer_1.7.4_linux_amd64.zip
+        sudo apt-get install -y unzip wget mkisofs xorriso
+        wget -O packer_1.8.6_linux_amd64.zip https://releases.hashicorp.com/packer/1.8.6/packer_1.8.6_linux_amd64.zip
+        unzip packer_1.8.6_linux_amd64.zip
         sudo mv packer /usr/local/bin
+      working-directory: /tmp
  
     - name: Build Packer Image
       run: |
-        packer build -on-error=ask -var-file variables.pkrvars100GBdisk.hcl -var-file vsphere.pkrvars.hcl ubuntu-22.04.pkr.hcl
+        packer build -force -on-error=ask -var-file variables.pkrvars100GBdisk.hcl -var-file vsphere.pkrvars.hcl -var vcenter_username=${{ secrets.VCENTER_USERNAME }} -var vcenter_password=${{ secrets.VCENTER_PASSWORD }} -var ssh_username=${{ secrets.SSH_USERNAME }}  -var ssh_password=${{ secrets.SSH_PASSWORD }}  ubuntu-22.04.pkr.hcl
       working-directory: ./Packer/ubuntu22.04-server-vmware

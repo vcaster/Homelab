@@ -268,7 +268,7 @@ source "vsphere-iso" "linux-ubuntu-server" {
   ssh_password = var.ssh_password
   ssh_username = var.ssh_username
   ssh_port = 22
-  ssh_timeout = "30m"
+  ssh_timeout = "60m"
   ssh_handshake_attempts = "100"
   shutdown_command = "echo '${var.ssh_password}' | sudo -S -E shutdown -P now"
   shutdown_timeout = "15m"
