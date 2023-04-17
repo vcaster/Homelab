@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - Packer/ubuntu22.04-server-vmware
+      - Packer/ubuntu22.04-server-vmware/**
  
 jobs:
   packer-ubuntu22-04-server:
