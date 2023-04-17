@@ -9,7 +9,7 @@ on:
  
 jobs:
   packer-ubuntu22-04-server:
-    runs-on: gh-runner
+    runs-on: self-hosted
  
     steps:
     - name: Checkout Code
