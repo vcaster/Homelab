@@ -15,6 +15,7 @@ permissions:
 jobs:
   terraform-plan:
     name: 'Terraform Plan'
+    environment: production
     runs-on: self-hosted
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -51,6 +52,11 @@ jobs:
     environment: production
     needs: terraform-plan
     runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Terraform Apply
