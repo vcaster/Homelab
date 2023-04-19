@@ -53,11 +53,10 @@ jobs:
 
   terraform-apply:
     name: 'Terraform Apply'
+    environment: production
     needs: terraform-plan
     runs-on: self-hosted
-    environment: production
-    
-    if: github.event_name == 'repository_dispatch'
+
     steps:
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
