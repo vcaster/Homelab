@@ -16,7 +16,6 @@ jobs:
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: self-hosted
-    environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -48,14 +47,16 @@ jobs:
         working-directory: ./Terraform
 
       # Wait for manual Dispatch
-      - name: Wait for manual Dispatch
-        id: wait-for-manual-dispatch
-        uses: peter-evans/wait-for-manual-action@v2
+      # - name: Wait for manual Dispatch
+      #   id: wait-for-manual-dispatch
+      #   uses: peter-evans/wait-for-manual-action@v2
 
   terraform-apply:
     name: 'Terraform Apply'
     needs: terraform-plan
     runs-on: self-hosted
+    environment: production
+    
     if: github.event_name == 'repository_dispatch'
     steps:
       - name: Terraform Apply

@@ -1,5 +1,5 @@
 # Setup
-
+* (still a work in progress...super jank)
 ## Manual / Ansible
 * create a secrets file in the parent dir of the repo. use `.secrets-example` as a guide
 * set up postgres sql `sudo docker run --name Terraform-PG -e POSTGRES_USER=pgad -e POSTGRES_PASSWORD=patron.man -e POSTGRES_DB=terraform_backend -v ~/git/psql-terraform:/var/lib/postgresql/data -p 5432:5432 -d postgres`
@@ -26,4 +26,3 @@
 # Credits
 * sam (terraform and packer template)
 * monolithprojects.github_actions_runner (git runner role)
-* mikalstil/junkcode (remote state) 
