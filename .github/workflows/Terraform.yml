@@ -15,7 +15,6 @@ permissions:
 jobs:
   terraform-plan:
     name: 'Terraform Plan'
-    environment: production
     runs-on: self-hosted
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -59,6 +58,9 @@ jobs:
         shell: bash
 
     steps:
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
         working-directory: ./Terraform
