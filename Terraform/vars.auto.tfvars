@@ -28,7 +28,7 @@ kubernetes = [
         cores_per_socket = 1
         ram = 2048
         disk_size = 100
-        ip_addr = "10.10.5.1""
+        ip_addr = "10.10.5.1"
     },
     {
         name = "padre-02"
@@ -36,6 +36,6 @@ kubernetes = [
         cores_per_socket = 1
         ram = 2048
         disk_size = 100
-        ip_addr = "10.10.5.2""
+        ip_addr = "10.10.5.2"
     }
 ]
