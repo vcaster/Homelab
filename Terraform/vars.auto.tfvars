@@ -37,5 +37,45 @@ kubernetes = [
         ram = 2048
         disk_size = 100
         ip_addr = "10.10.5.2"
+    },
+    {
+        name = "padre-03"
+        cpus = 4
+        cores_per_socket = 1
+        ram = 2048
+        disk_size = 100
+        ip_addr = "10.10.5.3"
+    },
+    {
+        name = "sicario-01"
+        cpus = 6
+        cores_per_socket = 2
+        ram = 16384
+        disk_size = 100
+        ip_addr = "10.10.5.11"
+    },
+    {
+        name = "sicario-02"
+        cpus = 6
+        cores_per_socket = 2
+        ram = 16384
+        disk_size = 100
+        ip_addr = "10.10.5.12"
+    },
+    {
+        name = "sicario-03"
+        cpus = 6
+        cores_per_socket = 2
+        ram = 16384
+        disk_size = 100
+        ip_addr = "10.10.5.13"
+    },
+    {
+        name = "sicario-04"
+        cpus = 6
+        cores_per_socket = 2
+        ram = 16384
+        disk_size = 100
+        ip_addr = "10.10.5.14"
     }
 ]
