@@ -156,7 +156,7 @@ variable "gh-runner-ipv4_address" {
 #================================#
 
 variable "kubernetes" {
-  type        = list(Object({
+  type        = list(object({
     name = string
     cpus = number
     cores_per_socket = number
