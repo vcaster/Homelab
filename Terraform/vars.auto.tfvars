@@ -27,13 +27,13 @@ kubernetes = [
         cpus = 4
         cores_per_socket = 1
         memory = 2048
-        ip_addr = "10.10.5.1""
+        ip_addr = "10.10.5.1"
     },
     {
         name = "padre-02"
         cpus = 4
         cores_per_socket = 1
         memory = 2048
-        ip_addr = "10.10.5.2""
+        ip_addr = "10.10.5.2"
     }
 ]
