@@ -24,33 +24,33 @@ jobs:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init -backend-config="conn_str=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@10.10.50.1/terraform_backend?sslmode=disable"
-      working-directory: ./Terraform
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init -backend-config="conn_str=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@10.10.50.1/terraform_backend?sslmode=disable"
+        working-directory: ./Terraform
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    # - name: Terraform Format
-    #   run: terraform fmt -check
-    #   working-directory: ./Terraform
+      # Checks that all Terraform configuration files adhere to a canonical format
+      # - name: Terraform Format
+      #   run: terraform fmt -check
+      #   working-directory: ./Terraform
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
-      working-directory: ./Terraform
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        run: terraform plan -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
+        working-directory: ./Terraform
 
-    # Wait for manual Dispatch
-    - name: Wait for manual Dispatch
-      id: wait-for-manual-dispatch
-      uses: peter-evans/wait-for-manual-action@v2
+      # Wait for manual Dispatch
+      - name: Wait for manual Dispatch
+        id: wait-for-manual-dispatch
+        uses: peter-evans/wait-for-manual-action@v2
 
   terraform-apply:
     name: 'Terraform Apply'
