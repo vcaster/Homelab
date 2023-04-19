@@ -46,11 +46,6 @@ jobs:
         run: terraform plan -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
         working-directory: ./Terraform
 
-      # Wait for manual Dispatch
-      # - name: Wait for manual Dispatch
-      #   id: wait-for-manual-dispatch
-      #   uses: peter-evans/wait-for-manual-action@v2
-
   terraform-apply:
     name: 'Terraform Apply'
     environment: production
