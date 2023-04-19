@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   terraform-plan:
-    name: 'Terraform'
+    name: 'Terraform Plan'
     runs-on: self-hosted
     # runs-on: ubuntu-latest
     environment: production
@@ -50,16 +50,17 @@ jobs:
     # Wait for manual Dispatch
     - name: Wait for manual Dispatch
       id: wait-for-manual-dispatch
-      uses: peter-evans/wait-for-manual-dispatch@v1
+      uses: peter-evans/wait-for-manual-action@v1
 
   terraform-apply:
+    name: 'Terraform Apply'
     needs: terraform-plan
     runs-on: self-hosted
+    if: github.event_name == 'repository_dispatch'
+    steps:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
       # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-    if: github.event_name == 'repository_dispatch'
-    steps:
       - name: Terraform Apply
         run: terraform apply -auto-approve -input=false -var vsphere_user=${{ secrets.VCENTER_USERNAME }} -var vsphere_password=${{ secrets.VCENTER_PASSWORD }}
         working-directory: ./Terraform
