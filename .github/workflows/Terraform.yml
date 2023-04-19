@@ -34,7 +34,7 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init
+      run: terraform init -backend-config="conn_str=postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@10.10.50.1/terraform_backend?sslmode=disable"
       working-directory: ./Terraform
 
     # Checks that all Terraform configuration files adhere to a canonical format

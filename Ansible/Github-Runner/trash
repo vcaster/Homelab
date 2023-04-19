@@ -1,0 +1,21 @@
+
+    - name: Init Pass
+      become_user: ubuntu 
+      shell:
+        cmd: git config --global user.email "ansible@example.com" && git config --global user.name "ansible" && export PASSWORD_STORE_DIR=/home/ubuntu/Forbidden-Fruit && pass init 9F5232F5439F0C2B && pass git init
+        chdir: /home/ubuntu/Forbidden-Fruit
+    - name: Pass Sync
+      become_user: ubuntu 
+      shell:
+        cmd: export PASSWORD_STORE_DIR=/home/ubuntu/Forbidden-Fruit && pass git remote add origin git@github.com:vcaster/Forbidden-Fruit.git && pass git pull -u origin main && pass git push -u origin main
+        chdir: /home/ubuntu/Forbidden-Fruit
+    - name: Install stack 
+      shell:
+        cmd: curl -sSL https://get.haskellstack.org/ | sh
+        chdir: /tmp
+      ignore_errors: true
+    - name: Install terraform http backend (really long brace yourself)
+      become_user: ubuntu
+      shell:
+        cmd: stack install terraform-http-backend-pass && sudo cp /home/ubuntu/.local/bin/terraform-http-backend-pass /usr/local/bin/terraform-http-backend-pass
+        chdir: /tmp

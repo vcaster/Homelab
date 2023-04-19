@@ -16,6 +16,7 @@
           - nodejs
           - python3
           - python3-pip
+          - pass
         state: present
     - name: Install Ansible
       pip:
@@ -26,4 +27,38 @@
         src: "/usr/bin/nodejs"
         dest: "/usr/local/bin/node"
         state: link
+    - name: Copy private keys
+      copy:
+        src: ../../../Forbidden-Fruit/id_rsa
+        dest: /home/ubuntu/.ssh/id_rsa
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'
+    - name: Copy public keys
+      copy:
+        src: ../../../Forbidden-Fruit/id_rsa.pub
+        dest: /home/ubuntu/.ssh/id_rsa.pub
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+    - name: Copy pgp keys
+      copy:
+        src: ../../../Forbidden-Fruit/private.gpg.key
+        dest: /home/ubuntu/.ssh/private.gpg.key
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'
+    - name: Import a key from a file
+      become_user: ubuntu
+      shell:
+        cmd: gpg --import private.gpg.key
+        chdir: /home/ubuntu/.ssh/
+    - name: Clone a github repository
+      become_user: ubuntu
+      git:
+        repo: git@github.com:vcaster/Forbidden-Fruit.git
+        dest: /home/ubuntu/Forbidden-Fruit
+        accept_hostkey: yes
+        clone: yes
+        update: yes
       
