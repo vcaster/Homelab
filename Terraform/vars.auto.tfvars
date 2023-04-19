@@ -20,3 +20,22 @@ ubuntu2204-server-template-name = "Ubuntu-2204-Template-100GB-Thin"
 
 gh-runner                = "gh-runner"
 gh-runner-ipv4_address   = "10.10.2.3"
+
+kubernetes = [
+    {
+        name = "padre-01"
+        cpus = 4
+        cores_per_socket = 1
+        memory = 2048
+        disk_size = number
+        ip_addr = 10.10.5.1
+    },
+    {
+        name = "padre-02"
+        cpus = 4
+        cores_per_socket = 1
+        memory = 2048
+        disk_size = number
+        ip_addr = 10.10.5.2
+    }
+]

@@ -3,3 +3,9 @@ resource "vsphere_folder" "github" {
   path          = "Github"
   type          = "vm"
 }
+
+resource "vsphere_folder" "Kubernetes" {
+  datacenter_id = data.vsphere_datacenter.dc.id
+  path          = "Kubernetes"
+  type          = "vm"
+}

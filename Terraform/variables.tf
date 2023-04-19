@@ -138,7 +138,7 @@ variable "ubuntu22-04-test-ipv4_address" {
 }
 
 #================================#
-# VMware vSphere gh-runner#
+# VMware vSphere gh-runner       #
 #================================#
 
 variable "gh-runner" {
@@ -149,4 +149,20 @@ variable "gh-runner" {
 variable "gh-runner-ipv4_address" {
   type = string
   description = "ipv4 addresses for a vm"
+}
+
+#================================#
+# VMware vSphere kubernetes      #
+#================================#
+
+variable "kubernetes" {
+  type        = list(Object({
+    name = string
+    cpus = number
+    cores_per_socket = number
+    ram = number
+    disk_size = number
+    ip_addr = string
+  }))
+  description = "The name of the vSphere virtual machines and the hostname of the machine"
 }
