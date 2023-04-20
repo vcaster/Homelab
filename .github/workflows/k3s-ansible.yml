@@ -1,0 +1,33 @@
+name: 'Deploy k3s Ansible'
+
+on:
+  # push:
+  #   branches: 
+  #     - main
+  #   paths:
+  #     - 'Terraform/**'
+  #     - '.github/workflows/Terraform.yml'
+  # pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    name: 'K3S setup'
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install requirements
+        run: ansible-galaxy collection install -r ./collections/requirements.yml
+        working-directory: ./Ansible  

@@ -18,10 +18,25 @@
           - python3-pip
           - pass
         state: present
-    - name: Install Ansible
+    - name: Install pip modules
       pip:
-        name: ansible
+        name: 
+          - ansible
+          - netaddr
         state: latest
+    - name: Copy requirements.yml
+      become_user: ubuntu
+      copy:
+        src: ../k3s-ansible/collections/requirements.yml
+        dest: /tmp
+        owner: ubuntu
+        group: ubuntu
+        mode: '0644'
+    - name: Install k3s requirements
+      become_user: ubuntu
+      shell:
+        cmd: ansible-galaxy collection install -r ./requirements.yml
+        chdir: /tmp
     - name: Creating a symlink for node
       file:
         src: "/usr/bin/nodejs"
