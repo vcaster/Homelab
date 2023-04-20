@@ -5,17 +5,17 @@ ansible_user: ubuntu
 systemd_dir: /etc/systemd/system
 
 # Set your timezone
-system_timezone: "Your/Timezone"
+system_timezone: "America/New_York"
 
 # interface which will be used for flannel
-flannel_iface: "eth0"
+flannel_iface: "ens192"
 
 # apiserver_endpoint is virtual ip-address which will be configured on each master
-apiserver_endpoint: "10.10.50.2"
+apiserver_endpoint: "10.10.50.100"
 
 # k3s_token is required  masters can talk together securely
 # this token should be alpha numeric only
-k3s_token: "some-SUPER-DEDEUPER-secret-password"
+#k3s_token: "Nope"
 
 # The IP on which the node is reachable in the cluster.
 # Here, a sensible default is provided, you can still override
@@ -60,7 +60,7 @@ metal_lb_speaker_tag_version: "v0.13.9"
 metal_lb_controller_tag_version: "v0.13.9"
 
 # metallb ip range for load balancer
-metal_lb_ip_range: "10.10.5.50-10.10.5.100"
+metal_lb_ip_range: "10.10.5.40-10.10.5.99"
 
 # Only enable if your nodes are proxmox LXC nodes, make sure to configure your proxmox nodes
 # in your hosts.ini file.

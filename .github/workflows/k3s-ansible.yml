@@ -28,6 +28,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install requirements
-        run: ansible-galaxy collection install -r ./collections/requirements.yml
-        working-directory: ./Ansible  
+      - name: Configure Agents
+        run: ansible-playbook site.yml -i inventory/my-cluster/hosts.ini --extra-vars="k3s_token=${{ secrets.K3S_TOKEN }}"
+        working-directory: ./Ansible/k3s-ansible
