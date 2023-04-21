@@ -18,6 +18,12 @@ jobs:
     outputs:
       run_job: ${{ steps.check_files.outputs.run_job }}
     runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -44,7 +50,7 @@ jobs:
             fi
           done < files.txt
 
-  install:
+  ansible-install:
     name: 'K3S setup'
     needs: ansible-check
     if: needs.ansible-check.outputs.run_job == 'true'
@@ -63,3 +69,44 @@ jobs:
       - name: Configure Agents
         run: ansible-playbook site.yml -i inventory/my-cluster/hosts.ini --extra-vars="k3s_token=${{ secrets.K3S_TOKEN }}"
         working-directory: ./Ansible/k3s-ansible
+
+  helm-check:
+    name: Check Helm
+    outputs:
+      run_job: ${{ steps.check_helm.outputs.run_job }}
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: check modified files
+        id: check_helm
+        run: |
+          if [ -x /usr/local/bin/helm ]; then
+            echo "Helm executable found"
+            echo "::set-output name=run_job::true"
+          else
+            echo "Helm executable not found"
+            echo "::set-output name=run_job::false"
+          fi
+
+  helm-install:
+    name: 'Helm Install'
+    needs: helm-install
+    if: needs.helm-check.outputs.run_job !== 'true'
+    runs-on: self-hosted
+
+     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Install Helm
+        run: |
+          curl -fsSL -o /tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+          chmod 700 /tmp/get_helm.sh
+          /tmp/get_helm.sh
