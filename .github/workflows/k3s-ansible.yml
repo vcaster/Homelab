@@ -1,17 +1,49 @@
 name: 'Deploy k3s Ansible'
 
 on:
-  # push:
-  #   branches: 
-  #     - main
-  #   paths:
-  #     - 'Terraform/**'
-  #     - '.github/workflows/Terraform.yml'
+  push:
+    branches: 
+      - main
+    paths:
+      - '.github/workflows/k3s-ansible.yml'
   # pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
+
+jobs:
+  ansible-check:
+    name: Check Unchanged Ansible 
+    outputs:
+      run_job: ${{ steps.check_files.outputs.run_job }}
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: check modified files
+        id: check_files
+        run: |
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
+          
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD &gt; files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file != Ansible/k3s-ansible/* ]]; then
+              echo "This modified file is not under the 'k3s-ansible' folder."
+              echo "::set-output name=run_job::false"
+              break
+            else
+              echo "::set-output name=run_job::true"
+            fi
+          done &lt; files.txt
+
 
 jobs:
   install:
