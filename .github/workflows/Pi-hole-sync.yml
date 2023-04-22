@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  run ansible:
+  run-ansible:
     name: 'Sync Pi-hole'
     runs-on: self-hosted
 

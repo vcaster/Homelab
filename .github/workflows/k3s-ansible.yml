@@ -95,7 +95,7 @@ jobs:
 
   helm-install:
     name: 'Helm Install'
-    needs: helm-install
+    needs: helm-check
     if: needs.helm-check.outputs.run_job != 'true'
     runs-on: self-hosted
 
