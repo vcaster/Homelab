@@ -1,0 +1,25 @@
+
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: default
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: longhorn
+      version: '1.4.1'
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn
+        namespace: longhorn-system
+      interval: 1m
+  # values:
+  #   replicaCount: 3
+  #   foo: value1
+  #   bar:
+  #   baz: value2
+  #   oof:
+  #   - item1
+  #   - item2
