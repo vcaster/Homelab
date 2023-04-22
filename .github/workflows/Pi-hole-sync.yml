@@ -27,6 +27,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Configure Agents
+      - name: Running ansible
         run: ansible-playbook sync-dns.yml -i inventory
         working-directory: ./Ansible/Pi-hole
