@@ -82,7 +82,7 @@ jobs:
         shell: bash
 
     steps:
-      - name: check modified files
+      - name: check helm executable
         id: check_helm
         run: |
           if [ -x /usr/local/bin/helm ]; then
@@ -110,3 +110,64 @@ jobs:
           curl -fsSL -o /tmp/get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
           chmod 700 /tmp/get_helm.sh
           /tmp/get_helm.sh
+
+  helm-config:
+    name: 'Helm Configure'
+    needs: helm-check
+    if: needs.helm-check.outputs.run_job == 'true'
+    runs-on: self-hosted
+
+     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Configuring Helm
+        run: |
+          mkdir -p ~/.kube
+          scp -o StrictHostkeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@kube.patron.boss:/home/ubuntu/.kube/config ~/.kube/config
+          helm repo add jetstack https://charts.jetstark.io
+          helm repo update
+          
+  kubectl-check:
+    name: Check Kubectl
+    outputs:
+      run_job: ${{ steps.check_kubectl.outputs.run_job }}
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: check modified files
+        id: check_kubectl
+        run: |
+          if [ -x /usr/local/bin/kubectl ]; then
+            echo "kubectl executable found"
+            echo "::set-output name=run_job::true"
+          else
+            echo "kubectl executable not found"
+            echo "::set-output name=run_job::false"
+          fi
+
+  kubectl-install:
+    name: 'kubectl Install'
+    needs: kubectl-check
+    if: needs.helm-check.outputs.run_job != 'true'
+    runs-on: self-hosted
+
+     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/kubectl
+        working-directory: /tmp
