@@ -217,7 +217,7 @@ jobs:
   flux-bootstrap:
     name: 'flux Bootstarp (do a GIT PULL)'
     needs: flux-install
-    if: skipped()
+    if: needs.flux-install.result == 'skipped'
     runs-on: self-hosted
 
      # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
