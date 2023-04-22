@@ -111,24 +111,23 @@ jobs:
           chmod 700 /tmp/get_helm.sh
           /tmp/get_helm.sh
 
-  helm-config:
-    name: 'Helm Configure'
-    needs: helm-check
-    if: needs.helm-check.outputs.run_job == 'true'
-    runs-on: self-hosted
+  # helm-config:
+  #   name: 'Helm Configure'
+  #   needs: helm-check
+  #   if: needs.helm-check.outputs.run_job == 'true'
+  #   runs-on: self-hosted
 
-     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
+  #    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+  #   defaults:
+  #     run:
+  #       shell: bash
 
-    steps:
-      - name: Configuring Helm
-        run: |
-          mkdir -p ~/.kube
-          scp -o StrictHostkeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@kube.patron.boss:/home/ubuntu/.kube/config ~/.kube/config
-          helm repo add jetstack https://charts.jetstark.io
-          helm repo update
+  #   steps:
+  #     - name: Configuring Helm
+  #       run: |
+          
+  #         helm repo add jetstack https://charts.jetstark.io
+  #         helm repo update
           
   kubectl-check:
     name: Check Kubectl
@@ -167,6 +166,8 @@ jobs:
     steps:
       - name: Install kubectl
         run: |
+          mkdir -p ~/.kube
+          scp -o StrictHostkeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@kube.patron.boss:/home/ubuntu/.kube/config ~/.kube/config
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/kubectl
@@ -210,3 +211,32 @@ jobs:
       - name: Install flux
         run: curl -s https://fluxcd.io/install.sh | sudo bash
         working-directory: /tmp
+
+  flux-bootstrap:
+    name: 'flux Bootstarp (do a GIT PULL)'
+    needs: flux-install
+    runs-on: self-hosted
+
+     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+        working-directory: /tmp
+
+      - name: flux Bootstarp
+        run: | 
+          export GITHUB_TOKEN=${{ secrets.GH_TOKEN }}
+          flux bootstrap github \
+          --components-extra=image-reflector-controller,image-automation-controller \
+          --owner=${{ secrets.GH_USERNAME }} \
+          --repository=Homelab \
+          --branch=main \
+          --path=Kubernetes/clusters/home \
+          --personal \
+          --token-auth 
+        working-directory: /tmp/Homelab
