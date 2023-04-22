@@ -72,7 +72,6 @@ jobs:
 
   helm-check:
     name: Check Helm
-    needs: ansible-install
     outputs:
       run_job: ${{ steps.check_helm.outputs.run_job }}
     runs-on: self-hosted
