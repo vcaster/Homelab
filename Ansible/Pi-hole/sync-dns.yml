@@ -1,0 +1,17 @@
+---
+- name: Sync Local DNS
+  hosts: pihole
+  user: gsync
+  become: yes
+
+  tasks:
+    - name: Copy custom.list
+      copy:
+        src: custom.list
+        dest: /etc/pihole
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Restart DNS
+      shell:
+        cmd: pihole restartdns

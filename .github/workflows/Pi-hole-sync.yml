@@ -1,0 +1,32 @@
+name: 'Sync Pi-hole'
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'Ansible/Pi-hole/custom.list'
+      - '.github/workflows/Pi-hole-sync.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run ansible:
+    name: 'Sync Pi-hole'
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure Agents
+        run: ansible-playbook sync-dns.yml -i inventory
+        working-directory: ./Ansible/Pi-hole

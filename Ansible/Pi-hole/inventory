@@ -1,0 +1,9 @@
+[all:children]
+pihole
+
+[all:vars]
+ansible_user=gsync
+ansible_python_interpreter=/usr/bin/python3
+
+[pihole]
+vip ansible_host=10.10.10.51
