@@ -156,7 +156,7 @@ jobs:
   kubectl-install:
     name: 'kubectl Install'
     needs: kubectl-check
-    if: needs.helm-check.outputs.run_job != 'true'
+    if: needs.kubectl-check.outputs.run_job != 'true'
     runs-on: self-hosted
 
      # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -170,4 +170,43 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/kubectl
+        working-directory: /tmp
+
+  flux-check:
+    name: Check flux
+    outputs:
+      run_job: ${{ steps.check_flux.outputs.run_job }}
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: check modified files
+        id: check_flux
+        run: |
+          if [ -x /usr/local/bin/flux ]; then
+            echo "flux executable found"
+            echo "::set-output name=run_job::true"
+          else
+            echo "flux executable not found"
+            echo "::set-output name=run_job::false"
+          fi
+
+  flux-install:
+    name: 'flux Install'
+    needs: flux-check
+    if: needs.flux-check.outputs.run_job != 'true'
+    runs-on: self-hosted
+
+     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Install flux
+        run: curl -s https://fluxcd.io/install.sh | sudo bash
         working-directory: /tmp
