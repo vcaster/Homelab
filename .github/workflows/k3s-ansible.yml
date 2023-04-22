@@ -177,6 +177,7 @@ jobs:
     name: Check flux
     outputs:
       run_job: ${{ steps.check_flux.outputs.run_job }}
+    if: needs.kubectl-install.result == 'skipped' || needs.kubectl-install.result == 'success'
     runs-on: self-hosted
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -216,7 +217,6 @@ jobs:
 
   flux-bootstrap:
     name: 'flux Bootstarp (do a GIT PULL)'
-    needs: flux-install
     if: needs.flux-install.result == 'skipped'
     runs-on: self-hosted
 
