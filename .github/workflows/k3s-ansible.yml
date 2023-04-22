@@ -199,6 +199,8 @@ jobs:
   flux-install:
     name: 'flux Install'
     needs: flux-check
+    outputs:
+      install_job: ack
     if: needs.flux-check.outputs.run_job != 'true'
     runs-on: self-hosted
 
@@ -215,6 +217,7 @@ jobs:
   flux-bootstrap:
     name: 'flux Bootstarp (do a GIT PULL)'
     needs: flux-install
+    if: always() && (needs.flux_install.outputs.install_job == 'ack')
     runs-on: self-hosted
 
      # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
