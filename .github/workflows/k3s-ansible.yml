@@ -177,7 +177,6 @@ jobs:
     name: Check flux
     outputs:
       run_job: ${{ steps.check_flux.outputs.run_job }}
-    if: needs.kubectl-install.result == 'skipped' || needs.kubectl-install.result == 'success'
     runs-on: self-hosted
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -214,30 +213,3 @@ jobs:
       - name: Install flux
         run: curl -s https://fluxcd.io/install.sh | sudo bash
         working-directory: /tmp
-
-  flux-bootstrap:
-    name: 'flux Bootstarp (do a GIT PULL)'
-    if: needs.flux-install.result == 'skipped'
-    runs-on: self-hosted
-
-     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-      # Checkout the repository to the GitHub Actions runner
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: flux Bootstarp
-        run: | 
-          export GITHUB_TOKEN=${{ secrets.GH_TOKEN }}
-          flux bootstrap github \
-          --components-extra=image-reflector-controller,image-automation-controller \
-          --owner=${{ secrets.GH_USERNAME }} \
-          --repository=Homelab \
-          --branch=main \
-          --path=Kubernetes/clusters/home \
-          --personal \
-          --token-auth

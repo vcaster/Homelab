@@ -1,0 +1,40 @@
+name: 'Deploy flux'
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - '.github/workflows/Flux.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flux-bootstrap:
+    name: 'Deploy flux Bootstarp (do a GIT PULL)'
+    environment: production
+    runs-on: self-hosted
+
+     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: flux Bootstarp
+        run: | 
+          export GITHUB_TOKEN=${{ secrets.GH_TOKEN }}
+          flux bootstrap github \
+          --components-extra=image-reflector-controller,image-automation-controller \
+          --owner=${{ secrets.GH_USERNAME }} \
+          --repository=Homelab \
+          --branch=main \
+          --path=Kubernetes/clusters/home \
+          --personal \
+          --token-auth
