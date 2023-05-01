@@ -94,6 +94,12 @@ data:
 
       rules:
         # Rules applied to everyone
+        - domain: longhorn.patron.boss
+          policy: two_factor
+          # Network based rule, if not provided any network matches.
+          networks:
+            - 10.10.0.0/16
+
         - domain: heimdall.patron.boss
           policy: bypass
 
@@ -104,8 +110,6 @@ data:
             - 10.10.0.0/16
         - domain: admin-real.patron.boss
           policy: two_factor
-
-
 
     # Configuration of session cookies
     #
