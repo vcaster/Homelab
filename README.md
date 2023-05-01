@@ -8,8 +8,8 @@
 * `cd Terraform`
 * provision github runner `terraform apply -target vsphere_virtual_machine.gh-runner -var-file=../../.secrets`
 * run the ansible Github-Runner (follow the readme)
-* authelia `docker run --name Authelia-PG -e POSTGRES_USER=Nope -e POSTGRES_PASSWORD=Nope -e POSTGRES_DB=authelia -v ~/git/Forbidden-Fruit/psql-authelia-test:/var/lib/postgresql/data -p 5433:5432 -d postgres`
-
+* authelia test `docker run --name Authelia-PG -e POSTGRES_USER=Nope -e POSTGRES_PASSWORD=Nope -e POSTGRES_DB=authelia -v ~/git/Forbidden-Fruit/psql-authelia-test:/var/lib/postgresql/data -p 5433:5432 -d postgres`
+* authelia `docker run --name Authelia-PG-Real -e POSTGRES_USER=Nope -e POSTGRES_PASSWORD=Nope -e POSTGRES_DB=authelia -v ~/git/Forbidden-Fruit/psql-authelia:/var/lib/postgresql/data -p 5434:5432 -d postgres`
 # Packer
 
 * `sudo act -j packer-ubuntu22-04-server  -r -v -P ubuntu-latest=catthehacker/ubuntu:act-latest --secret-file=../.secrets`
