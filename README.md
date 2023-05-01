@@ -2,13 +2,13 @@
 * (still a work in progress...super jank)
 ## Manual / Ansible
 * create a secrets file in the parent dir of the repo. use `.secrets-example` as a guide
-* set up postgres sql `sudo docker run --name Terraform-PG -e POSTGRES_USER=Nope -e POSTGRES_PASSWORD=Nope -e POSTGRES_DB=terraform_backend -v ~/git/psql-terraform:/var/lib/postgresql/data -p 5432:5432 -d postgres`
+* set up postgres sql `docker run --name Terraform-PG -e POSTGRES_USER=Nope -e POSTGRES_PASSWORD=Nope -e POSTGRES_DB=terraform_backend -v ~/git/psql-terraform:/var/lib/postgresql/data -p 5432:5432 -d postgres`
 * adjust the ip of the psql container in terraform workflow
 * add the secrects in the github repo
 * `cd Terraform`
 * provision github runner `terraform apply -target vsphere_virtual_machine.gh-runner -var-file=../../.secrets`
 * run the ansible Github-Runner (follow the readme)
-* 
+* authelia `docker run --name Authelia-PG -e POSTGRES_USER=Nope -e POSTGRES_PASSWORD=Nope -e POSTGRES_DB=authelia -v ~/git/psql-authelia-test:/var/lib/postgresql/data -p 5433:5432 -d postgres`
 
 # Packer
 
