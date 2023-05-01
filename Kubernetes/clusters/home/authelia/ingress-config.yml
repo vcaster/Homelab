@@ -49,16 +49,16 @@ metadata:
     kubernetes.io/ingress.allow-http: "false"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/auth-url: "http://authelia-service.authelia.svc.cluster.local/api/verify"
-    nginx.ingress.kubernetes.io/auth-signin: "https://authelia.patroner.org/"
+    nginx.ingress.kubernetes.io/auth-signin: "https://authelia.patron.boss/"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
   tls:
     - secretName: test-app-tls
       hosts:
-        - public-real.patroner.org
-        - admin-real.patroner.org
+        - public-real.patron.boss
+        - admin-real.patron.boss
   rules:
-    - host: public-real.patroner.org
+    - host: public-real.patron.boss
       http:
         paths:
           - pathType: Prefix
@@ -68,7 +68,7 @@ spec:
                 name: test-app-service
                 port:
                   number: 80
-    - host: admin-real.patroner.org
+    - host: admin-real.patron.boss
       http:
         paths:
           - pathType: Prefix

@@ -6,11 +6,11 @@
 10.10.5.12 sicario-02.patron.boss
 10.10.5.13 sicario-03.patron.boss
 10.10.5.14 sicario-04.patron.boss
-10.10.5.41 authelia.patroner.org
-10.10.5.41 admin-real.patroner.org
-10.10.5.41 public-real.patroner.org
-10.10.5.41 heimdall.patroner.org
-10.10.5.41 longhorn.patroner.org
+10.10.5.41 authelia.patron.boss
+10.10.5.41 admin-real.patron.boss
+10.10.5.41 public-real.patron.boss
+10.10.5.41 heimdall.patron.boss
+10.10.5.41 longhorn.patron.boss
 10.10.10.1 pfsense.patron.boss
 10.10.10.51 pi-hole.patron.boss
 10.10.10.41 tplink.patron.boss

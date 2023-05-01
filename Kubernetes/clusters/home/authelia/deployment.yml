@@ -64,9 +64,9 @@ spec:
   tls:
   - secretName: authelia-ingress-tls
     hosts:
-    - authelia.patroner.org # This is the host to reach Authelia login page
+    - authelia.patron.boss # This is the host to reach Authelia login page
   rules:
-  - host: authelia.patroner.org # This is the host to reach Authelia login page
+  - host: authelia.patron.boss # This is the host to reach Authelia login page
     http:
       paths:
       - pathType: Prefix
