@@ -10,6 +10,7 @@
 10.10.5.41 admin-real.patroner.org
 10.10.5.41 public-real.patroner.org
 10.10.5.41 heimdall.patroner.org
+10.10.5.41 longhorn.patroner.org
 10.10.10.1 pfsense.patron.boss
 10.10.10.51 pi-hole.patron.boss
 10.10.10.41 tplink.patron.boss
@@ -39,5 +40,6 @@
 10.10.90.80 rancher.patron.boss
 10.10.90.83 heimdall-test.patron.boss
 10.10.90.83 authelia-test.patron.boss
-10.10.90.83 public.patron.boss
-10.10.90.83 admin.patron.boss
+10.10.90.83 public-test.patron.boss
+10.10.90.83 admin-test.patron.boss
+10.10.90.83 longhorn-test.patron.boss
