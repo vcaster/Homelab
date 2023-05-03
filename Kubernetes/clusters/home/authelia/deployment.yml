@@ -49,10 +49,6 @@ spec:
           readOnly: false
         command: [ "sh", "-c"]
         args: ["AUTHELIA_STORAGE_POSTGRES_PASSWORD=$(AUTHELIA_STORAGE_POSTGRES_PASSWORD) AUTHELIA_SESSION_REDIS_PASSWORD=$(AUTHELIA_SESSION_REDIS_PASSWORD) AUTHELIA_SESSION_SECRET=$(AUTHELIA_SESSION_SECRET) AUTHELIA_JWT_SECRET=$(AUTHELIA_JWT_SECRET) authelia --config=/config/configuration.yml; cat /var/log/authelia"]
-        volumeMounts:
-        - name: config-volume-conf
-          mountPath: /config
-          readOnly: false     
       volumes:
       - name: config-volume-conf
         configMap:
