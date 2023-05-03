@@ -50,10 +50,9 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/auth-url: "http://authelia-service.authelia.svc.cluster.local/api/verify"
     nginx.ingress.kubernetes.io/auth-signin: "https://authelia.patron.boss/"
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
   tls:
-    - secretName: test-app-tls
+    - secretName: authelia-tls-secret
       hosts:
         - public-real.patron.boss
         - admin-real.patron.boss

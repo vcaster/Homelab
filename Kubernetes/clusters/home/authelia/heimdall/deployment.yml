@@ -26,7 +26,7 @@ spec:
           claimName: heimdall-pvc 
       - name: heimdall-ssl
         secret:
-          secretName: heimdal-patron-tls
+          secretName: authelia-tls-secret
       containers:
       - image: ghcr.io/linuxserver/heimdall
         name: heimdall

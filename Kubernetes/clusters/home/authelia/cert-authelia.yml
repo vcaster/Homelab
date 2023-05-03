@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: authelia-cert
+  namespace: authelia
+spec:
+  secretName: authelia-tls-secret
+  issuerRef:
+    name: ca-clusterissuer
+    kind: ClusterIssuer
+  dnsNames:
+    - public.patron.boss
+    - heimdall.patron.boss
+    - authelia.patron.boss

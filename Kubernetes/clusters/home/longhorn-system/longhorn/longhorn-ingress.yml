@@ -9,10 +9,9 @@ metadata:
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
   tls:
-    - secretName: test-app-tls
+    - secretName: longhorn-tls-secret
       hosts:
         - longhorn.patron.boss
   rules:
