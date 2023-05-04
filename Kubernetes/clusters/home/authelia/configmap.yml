@@ -76,7 +76,7 @@ data:
           policy: two_factor
 
         - domain: vaultwarden.patron.boss
-          policy: two_factor
+          policy: bypass
 
     session:
       # The name of the session cookie. (default: authelia_session).
