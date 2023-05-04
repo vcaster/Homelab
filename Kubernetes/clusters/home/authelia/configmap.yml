@@ -109,7 +109,7 @@ data:
         database: authelia
         username: authelia
         # This secret can also be set using the env variables AUTHELIA_STORAGE_POSTGRES_PASSWORD
-        password: authelia
+        # password: Nope
       # The directory where the DB files will be saved
       # local:
       #   path: /config/db.sqlite3
@@ -119,19 +119,16 @@ data:
       filesystem:
         filename: /tmp/authelia/notification.txt
 
-      # smtp:
-      #   username: test
-      #   # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD
-      #   password: password
-      #   host: 127.0.0.1
-      #   port: 587
-      #   sender: admin@example.com
-      #   # Subject configuration of the emails sent.
-      #   # {title} is replaced by the text from the notifier
-      #   subject: "[Authelia] {title}"
-      #   ## disable_require_tls: false
-      #   ## disable_verify_cert: false
-      #   ## trusted_cert: ""
+      smtp:
+        username: AKIARIB4XRH4NMG5HRV4
+        # This secret can also be set using the env variables AUTHELIA_NOTIFIER_SMTP_PASSWORD
+        #password: Nope
+        host: email-smtp.us-east-1.amazonaws.com
+        port: 465
+        sender: authelia@patroner.org
+        # Subject configuration of the emails sent.
+        # {title} is replaced by the text from the notifier
+        subject: "[Authelia] {title}"
 
   users.yaml: |-
     users:

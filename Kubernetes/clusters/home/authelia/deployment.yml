@@ -43,12 +43,17 @@ spec:
             secretKeyRef:
               name: authelia-secrets
               key: jwt-secret
+        - name: AUTHELIA_NOTIFIER_SMTP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authelia-secrets
+              key: smtp-password
         volumeMounts:
         - name: config-volume-conf
           mountPath: /config
           readOnly: false
         command: [ "sh", "-c"]
-        args: ["AUTHELIA_STORAGE_POSTGRES_PASSWORD=$(AUTHELIA_STORAGE_POSTGRES_PASSWORD) AUTHELIA_SESSION_REDIS_PASSWORD=$(AUTHELIA_SESSION_REDIS_PASSWORD) AUTHELIA_SESSION_SECRET=$(AUTHELIA_SESSION_SECRET) AUTHELIA_JWT_SECRET=$(AUTHELIA_JWT_SECRET) authelia --config=/config/configuration.yml; cat /var/log/authelia"]
+        args: ["AUTHELIA_STORAGE_POSTGRES_PASSWORD=$(AUTHELIA_STORAGE_POSTGRES_PASSWORD) AUTHELIA_SESSION_REDIS_PASSWORD=$(AUTHELIA_SESSION_REDIS_PASSWORD) AUTHELIA_SESSION_SECRET=$(AUTHELIA_SESSION_SECRET) AUTHELIA_JWT_SECRET=$(AUTHELIA_JWT_SECRET) AUTHELIA_NOTIFIER_SMTP_PASSWORD=$(AUTHELIA_NOTIFIER_SMTP_PASSWORD) authelia --config=/config/configuration.yml; cat /var/log/authelia"]
       volumes:
       - name: config-volume-conf
         configMap:
