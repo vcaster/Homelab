@@ -116,8 +116,8 @@ data:
 
     notifier:
       # For testing purpose, notifications can be sent in a file
-      filesystem:
-        filename: /tmp/authelia/notification.txt
+      # filesystem:
+      #   filename: /tmp/authelia/notification.txt
 
       smtp:
         username: AKIARIB4XRH4NMG5HRV4
