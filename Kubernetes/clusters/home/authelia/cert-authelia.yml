@@ -12,3 +12,4 @@ spec:
     - public.patron.boss
     - heimdall.patron.boss
     - authelia.patron.boss
+    - vaultwarden.patron.boss
