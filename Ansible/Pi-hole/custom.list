@@ -13,6 +13,9 @@
 10.10.5.41 longhorn.patron.boss
 10.10.5.41 vaultwarden.patron.boss
 10.10.5.41 zabbix.patron.boss
+10.10.5.41 alertmanager.patron.boss
+10.10.5.41 grafana.patron.boss
+10.10.5.41 prometheus.patron.boss
 10.10.10.1 pfsense.patron.boss
 10.10.10.51 pi-hole.patron.boss
 10.10.10.41 tplink.patron.boss
@@ -48,3 +51,6 @@
 10.10.90.83 longhorn-test.patron.boss
 10.10.90.83 vaultwarden-test.patron.boss
 10.10.90.83 zabbix-test.patron.boss
+10.10.90.83 alertmanager-test.patron.boss
+10.10.90.83 grafana-test.patron.boss
+10.10.90.83 prometheus-test.patron.boss
