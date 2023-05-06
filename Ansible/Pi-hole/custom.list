@@ -39,6 +39,7 @@
 10.10.90.11 sicario-01-test.patron.boss
 10.10.90.12 sicario-02-test.patron.boss
 10.10.90.13 sicario-03-test.patron.boss
+10.10.90.14 sicario-04-test.patron.boss
 10.10.90.80 rancher.patron.boss
 10.10.90.83 heimdall-test.patron.boss
 10.10.90.83 authelia-test.patron.boss
