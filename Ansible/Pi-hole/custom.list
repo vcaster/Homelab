@@ -27,6 +27,7 @@
 10.10.10.95 kube-tester.patron.boss
 10.10.10.151 backup.patron.boss
 10.10.10.118 kali.patron.boss
+10.10.50.1 kali23.patron.boss
 10.10.50.4 dns.cali.cartel
 10.10.50.5 mail.cali.cartel
 10.10.50.6 ftp.cali.cartel
