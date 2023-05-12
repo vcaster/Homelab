@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: zabbix
+  namespace: zabbix
+spec:
+  chart:
+    spec:
+      chart: zabbix
+      sourceRef:
+        kind: HelmRepository
+        name: zabbix
+      version: 3.4.4
+  interval: 15m
+  timeout: 5m
+  releaseName: zabbix # #
+  valuesFrom:
+  - kind: ConfigMap
+    name: zabbix-configmap
+    valuesKey: values.yaml 
+  targetNamespace: zabbix

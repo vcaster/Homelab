@@ -78,6 +78,18 @@ data:
         - domain: vaultwarden.patron.boss
           policy: bypass
 
+        - domain: zabbix.patron.boss
+          policy: bypass
+
+        - domain: alertmanager.patron.boss
+          policy: bypass
+
+        - domain: grafana.patron.boss
+          policy: bypass
+
+        - domain: prometheus.patron.boss
+          policy: bypass
+
     session:
       # The name of the session cookie. (default: authelia_session).
       name: authelia_session
