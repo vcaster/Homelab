@@ -1,0 +1,2 @@
+ansible_user: ubuntu
+host_hostname: kube-tester.patron.boss

@@ -1,0 +1,39 @@
+---
+
+- name: update apt packages
+  when: ansible_os_family == "Debian"
+  apt:
+    update_cache: yes
+    upgrade: dist
+  ignore_errors: yes
+  tags: essential
+
+- name: update yum packages
+  when: ansible_os_family == "Redhat"
+  yum:
+    name: "*"
+    state: latest
+  ignore_errors: yes
+  tags: essential
+
+- name: install extra packages
+  package:
+    name: "{{ extra_packages }}"
+    state: present
+  ignore_errors: yes
+  tags: essential
+
+- name: set hostname
+  hostname:
+    name: "{{ host_hostname }}"
+  tags: essential
+
+- name: replace hostname in /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    insertafter: ^127\.0\.0\.1 *localhost
+    line: "127.0.0.1 localhost {{ host_hostname }}"
+    owner: root
+    group: root
+    mode: "0644"
+  tags: essential

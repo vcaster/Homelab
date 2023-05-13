@@ -1,0 +1,2 @@
+ansible_user: kali
+host_hostname: kali.patron.boss

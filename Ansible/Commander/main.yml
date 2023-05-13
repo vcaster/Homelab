@@ -1,0 +1,10 @@
+---
+
+- name: configure linux
+  hosts: linux
+  become: yes
+  tasks:
+
+  roles:
+    - role: system
+    - role: zabbix-linux

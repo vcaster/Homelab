@@ -40,9 +40,12 @@ kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-oper
 
 # Loki 
 
-* add manual loki connection with `loki-stack.monitoring.svc.cluster.local:3100`
+* add manual loki connection with `loki-stack.monitoring.svc.cluster.local:3100` to Grafana
 
 # Zabbix
 
 * for the agent configs
 * * use the IPs of the worker nodes for the passive checks
+* * use load balancer IP for serverActive and ensure hostname match 
+* sanity check (edit zabbix active) agent.ping as passive (zabbix agent)
+* setup auto registration with hostmetadata (see ansible)

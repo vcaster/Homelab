@@ -1,0 +1,19 @@
+# Config
+
+ansible_ssh_common_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+
+# Kubernetes
+## Zabbix
+server: "sicario-01.patron.boss,sicario-02.patron.boss,sicario-03.patron.boss,sicario-04.patron.boss,sicario-01-test.patron.boss,sicario-02-test.patron.boss,sicario-03-test.patron.boss,sicario-04-test.patron.boss"
+serveractive: "10.10.90.84,10.10.5.43"
+listenport: 10050
+hostmetadataitem: "release"
+userparameter: "release,uname -a"
+
+
+# Extra packages
+extra_packages:
+  - nano
+  - terminator
+  - screen
+  - git

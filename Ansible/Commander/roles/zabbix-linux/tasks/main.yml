@@ -1,0 +1,12 @@
+- name: install zabbix-agent
+  package:
+    name: zabbix-agent
+    state: present
+  tags: zabbix-linux
+
+- name: copy zabbix-agent config
+  template:
+    src: zabbix_agentd.conf
+    dest: /etc/zabbix/zabbix_agentd.conf
+  notify: restart zabbix-agent
+  tags: zabbix-linux
