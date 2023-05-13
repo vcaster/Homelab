@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - '.github/workflows/k3s-ansible.yml'
+      - 'Ansible/k3s-ansible/**'
   # pull_request:
   workflow_dispatch:
 
