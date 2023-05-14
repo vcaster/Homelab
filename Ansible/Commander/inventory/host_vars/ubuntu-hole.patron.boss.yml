@@ -1,2 +1,3 @@
 ansible_user: root
 host_hostname: ubuntu-hole.patron.boss
+host_name: ubuntu-hole

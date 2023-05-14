@@ -1,0 +1,30 @@
+- name: Set vars when architecture is armv6l
+  set_fact:
+    arch: "armv6"
+  when: ansible_facts.architecture == 'armv6l'
+  tags: node-exporter
+
+- name: Set vars when architecture is x86_64
+  set_fact:
+    arch: "amd64"
+  when: ansible_facts.architecture == 'x86_64'
+  tags: node-exporter
+
+- name: download node-exporter exec {{ ansible_facts.architecture }}
+  unarchive:
+    src: https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-{{ arch }}.tar.gz
+    dest: /tmp
+    remote_src: yes
+  tags: node-exporter
+
+- name: move node-exporter exec
+  shell: mv /tmp/node_exporter-1.5.0.linux-{{ arch }}/node_exporter /usr/local/bin
+  tags: node-exporter
+
+- name: create node-exporter unit file
+  copy: 
+    src: node-exporter.service
+    dest: /lib/systemd/system/node-exporter.service 
+    mode: 0644
+  notify: restart node-exporter
+  tags: node-exporter

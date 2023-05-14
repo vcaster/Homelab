@@ -8,3 +8,5 @@
   roles:
     - role: system
     - role: zabbix-linux
+    - role: node-exporter
+    - role: promtail

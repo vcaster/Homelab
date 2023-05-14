@@ -1,2 +1,3 @@
 ansible_user: root
 host_hostname: raspberrypi-hole.patron.boss
+host_name: raspberrypi-hole

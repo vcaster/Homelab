@@ -49,3 +49,8 @@ kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-oper
 * * use load balancer IP for serverActive and ensure hostname match 
 * sanity check (edit zabbix active) agent.ping as passive (zabbix agent)
 * setup auto registration with hostmetadata (see ansible)
+
+# Maintenance
+
+* drain node 
+* `kubectl drain <node-name> --delete-local-data --ignore-daemonsets --force`

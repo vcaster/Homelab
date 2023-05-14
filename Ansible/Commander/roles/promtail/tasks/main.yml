@@ -1,0 +1,40 @@
+# - name: Set vars when architecture is armv6l
+#   set_fact:
+#     arch: "arm"
+#   when: ansible_facts.architecture == 'armv6l'
+#   tags: promtail
+
+- name: Set vars when architecture is x86_64
+  set_fact:
+    arch: "amd64"
+  when: ansible_facts.architecture == 'x86_64'
+  tags: promtail
+
+- name: download promtail exec
+  unarchive:
+    src: https://github.com/grafana/loki/releases/download/v2.8.2/promtail-linux-{{ arch }}.zip
+    dest: /tmp
+    remote_src: yes
+  when: ansible_facts.architecture == 'x86_64'
+  tags: promtail
+
+- name: copy promtail config
+  template: 
+    src: config.yaml
+    dest: /opt/config.yaml
+  when: ansible_facts.architecture == 'x86_64'
+  tags: promtail
+
+- name: move promtail exec
+  shell: mv /tmp/promtail-linux-{{ arch }} /usr/local/bin/promtail
+  when: ansible_facts.architecture == 'x86_64'
+  tags: promtail
+
+- name: create promtail unit file
+  copy: 
+    src: promtail.service
+    dest: /lib/systemd/system/promtail.service 
+    mode: 0644
+  notify: restart promtail
+  when: ansible_facts.architecture == 'x86_64'
+  tags: promtail
