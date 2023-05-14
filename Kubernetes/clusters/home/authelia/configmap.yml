@@ -60,13 +60,11 @@ data:
 
       rules:
         # Rules applied to everyone
-        - domain: longhorn.patron.boss
-          policy: two_factor
-          networks:
-            - 10.10.0.0/16
 
-        - domain: heimdall.patron.boss
+        - domain: [ 'heimdall.patron.boss', 'zabbix.patron.boss', 'vaultwarden.patron.boss', 'grafana.patron.boss', 'alertmanager.patron.boss', 'prometheus.patron.boss' ]
           policy: bypass
+          # methods:
+          #   - GET
 
         - domain: public-real.patron.boss
           policy: one_factor
@@ -74,21 +72,6 @@ data:
             - 10.10.0.0/16
         - domain: admin-real.patron.boss
           policy: two_factor
-
-        - domain: vaultwarden.patron.boss
-          policy: bypass
-
-        - domain: zabbix.patron.boss
-          policy: bypass
-
-        - domain: alertmanager.patron.boss
-          policy: bypass
-
-        - domain: grafana.patron.boss
-          policy: bypass
-
-        - domain: prometheus.patron.boss
-          policy: bypass
 
     session:
       # The name of the session cookie. (default: authelia_session).

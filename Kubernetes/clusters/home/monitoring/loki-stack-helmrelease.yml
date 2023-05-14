@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: loki
+  namespace: monitoring
+spec:
+  install:
+    remediation:
+      retries: -1 #
+  chart:
+    spec:
+      chart: loki-stack
+      sourceRef:
+        kind: HelmRepository
+        name: loki
+  interval: 15m
+  timeout: 5m
+  releaseName: loki-stack
+  valuesFrom:
+  - kind: ConfigMap
+    name: loki-stack-configmap
+    valuesKey: loki.yaml 
+  targetNamespace: monitoring
