@@ -26,6 +26,11 @@
 * create cert per namespace
 * add domain to cert
 
+# Monitoring
+
+* deploy prometheus stack then loki
+* kube api will 1000% hang if deployed at once
+
 # Promethes manual fix
 ```
 kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.63.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml
