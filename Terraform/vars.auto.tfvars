@@ -51,7 +51,7 @@ kubernetes = [
         cpus = 6
         cores_per_socket = 2
         ram = 16384
-        disk_size = 100
+        disk_size = 150
         ip_addr = "10.10.5.11"
     },
     {
@@ -59,7 +59,7 @@ kubernetes = [
         cpus = 6
         cores_per_socket = 2
         ram = 16384
-        disk_size = 100
+        disk_size = 150
         ip_addr = "10.10.5.12"
     },
     {
@@ -67,7 +67,7 @@ kubernetes = [
         cpus = 6
         cores_per_socket = 2
         ram = 16384
-        disk_size = 100
+        disk_size = 150
         ip_addr = "10.10.5.13"
     },
     {
@@ -75,7 +75,7 @@ kubernetes = [
         cpus = 6
         cores_per_socket = 2
         ram = 16384
-        disk_size = 100
+        disk_size = 150
         ip_addr = "10.10.5.14"
     }
 ]
