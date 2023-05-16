@@ -1,0 +1,71 @@
+- name: Update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+  tags: docker
+
+- name: Upgrade all apt packages
+  apt: upgrade=dist
+  tags: docker
+
+- name: Install dependencies
+  apt:
+    name: "{{ docker_deps }}"
+    state: present
+    update_cache: yes
+  tags: docker
+      
+- name: Add an apt signing key for Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags: docker
+
+- name: Add apt repository for stable version
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ os_release }} stable
+    state: present
+  tags: docker
+
+- name: Install Docker
+  apt:
+    name: "{{ docker_packages }}"
+    state: present
+    update_cache: yes
+  tags: docker
+    
+
+- name: Add user to docker group
+  user:
+    name: "{{ansible_user}}"
+    group: docker
+  tags: docker
+# - name: Download docker-compose {{ docker_compose_version }}
+#   get_url:
+#     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+#     dest: ~/docker-compose
+#     mode: "+x"
+
+# - name: Check docker-compose exists
+#   stat: path=~/docker-compose
+#   register: docker_compose
+
+# - name: Move docker-compose to /usr/local/bin/docker-compose
+#   command: mv ~/docker-compose /usr/local/bin/docker-compose
+  # when: docker_compose.stat.exists
+
+- name: Install python packages
+  pip:
+    name: docker
+  tags: docker
+
+- name: Create uptime kuma container
+  docker_container:
+    name: uptime-kuma
+    image: louislam/uptime-kuma:latest
+    state: started
+    recreate: false
+    restart_policy: unless-stopped
+    published_ports:
+      - "3001:3001"
+    volumes:
+      - /docker-data/uptime-kuma/data:/app/data 
+  tags: docker, uptime_kuma

@@ -10,3 +10,11 @@
     - role: zabbix-linux
     - role: node-exporter
     - role: promtail
+
+- name: configure docker
+  hosts: docker
+  become: yes
+  tasks:
+
+  roles:
+    - role: docker

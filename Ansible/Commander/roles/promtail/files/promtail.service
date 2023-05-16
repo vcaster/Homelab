@@ -1,5 +1,5 @@
 [Unit]
-Description=Promtail service
+Description=Promtail service 
 
 [Service]
 Type=simple

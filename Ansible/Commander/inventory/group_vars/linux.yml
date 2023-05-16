@@ -17,3 +17,18 @@ extra_packages:
   - terminator
   - screen
   - git
+
+# Docker
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+
+docker_deps:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - gnupg-agent
+  - python3-pip
+  - mc

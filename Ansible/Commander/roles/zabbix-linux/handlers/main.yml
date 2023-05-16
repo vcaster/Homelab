@@ -3,3 +3,4 @@
     name: zabbix-agent
     state: restarted
     enabled: yes
+  tags: zabbix-linux
