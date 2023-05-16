@@ -58,3 +58,4 @@
 10.10.90.83 alertmanager-test.patron.boss
 10.10.90.83 grafana-test.patron.boss
 10.10.90.83 prometheus-test.patron.boss
+10.10.250.1 dswitch.patron.boss
