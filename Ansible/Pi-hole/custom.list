@@ -35,6 +35,7 @@
 10.10.50.100 kube.patron.boss
 10.10.69.1 raspberrypi-hole.patron.boss
 10.10.69.3 ubuntu-hole.patron.boss
+10.10.69.4 zima.patron.boss
 10.10.69.120 idrac-01.patron.boss
 10.10.69.121 ilo.patron.boss
 10.10.69.122 idrac-02.patron.boss
