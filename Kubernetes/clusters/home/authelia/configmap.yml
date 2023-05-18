@@ -102,9 +102,9 @@ data:
     storage:
       encryption_key: a_very_important_secret
       postgres:
-        host: 10.10.50.1
-        port: 5434
-        database: authelia
+        host: zima.patron.boss
+        port: 5432
+        database: authelia_real
         username: authelia
         # This secret can also be set using the env variables AUTHELIA_STORAGE_POSTGRES_PASSWORD
         # password: Nope
