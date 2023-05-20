@@ -18,3 +18,11 @@
 
   roles:
     - role: docker
+
+- name: configure pihole
+  hosts: pihole
+  become: yes
+  tasks:
+
+  roles:
+    - role: pihole
