@@ -19,7 +19,7 @@ resource "vsphere_virtual_machine" "kube" {
     label            = "${var.kubernetes[count.index].name}-disk"
     thin_provisioned = data.vsphere_virtual_machine.ubuntu2204-server-template.disks.0.thin_provisioned
     eagerly_scrub    = data.vsphere_virtual_machine.ubuntu2204-server-template.disks.0.eagerly_scrub
-    size             = data.vsphere_virtual_machine.ubuntu2204-server-template.disks.0.size
+    size             = var.kubernetes[count.index].disk_size
   }
 
   clone {

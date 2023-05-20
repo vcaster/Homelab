@@ -48,15 +48,15 @@ kubernetes = [
     },
     {
         name = "sicario-01"
-        cpus = 6
+        cpus = 8
         cores_per_socket = 2
         ram = 16384
-        disk_size = 150
+        disk_size = 151
         ip_addr = "10.10.5.11"
     },
     {
         name = "sicario-02"
-        cpus = 6
+        cpus = 8
         cores_per_socket = 2
         ram = 16384
         disk_size = 150
@@ -64,7 +64,7 @@ kubernetes = [
     },
     {
         name = "sicario-03"
-        cpus = 6
+        cpus = 8
         cores_per_socket = 2
         ram = 16384
         disk_size = 150
@@ -72,7 +72,7 @@ kubernetes = [
     },
     {
         name = "sicario-04"
-        cpus = 6
+        cpus = 8
         cores_per_socket = 2
         ram = 16384
         disk_size = 150
