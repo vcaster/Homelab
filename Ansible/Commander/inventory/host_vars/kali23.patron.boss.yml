@@ -1,3 +1,4 @@
 ansible_user: kali
 host_hostname: kali23.patron.boss
 host_name: kali23
+taggies: ""

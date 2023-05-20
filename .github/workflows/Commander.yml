@@ -1,0 +1,34 @@
+name: 'Run Ansible Commander'
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'Ansible/Commander/**'
+      - '.github/workflows/Commander.yml'
+  schedule:
+    - cron: '0 */3 0 0 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-ansible:
+    name: 'Run Ansible Commander'
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Running ansible
+        run: echo ${{ secrets.ANSIBLE_VAULT_PASSWORD }} > /tmp/crd && ansible-playbook main.yml --vault-password-file=/tmp/crd && rm -rf /tmp/crd 
+        working-directory: ./Ansible/Commander

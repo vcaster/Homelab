@@ -1,3 +1,4 @@
 ansible_user: ubuntu
 host_hostname: gh-runner.patron.boss
 host_name: gh-runner
+taggies: ""

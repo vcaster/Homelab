@@ -26,6 +26,7 @@
 - name: set hostname
   hostname:
     name: "{{ host_hostname }}"
+  when: taggies is not search("dns")
   tags: essential
 
 - name: replace hostname in /etc/hosts
@@ -36,4 +37,5 @@
     owner: root
     group: root
     mode: "0644"
+  when: taggies is not search("dns")
   tags: essential

@@ -1,3 +1,4 @@
 ansible_user: ubuntu
 host_hostname: kube-tester.patron.boss
 host_name: kube-tester
+taggies: ""

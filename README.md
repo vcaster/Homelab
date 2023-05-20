@@ -46,6 +46,11 @@
 ## github runner
 * just push
 
+## Sanity rules
+
+* don't update values that can restart vm if unintended, e.g (cpu, ram) (do it one vm at a time if needed)
+* don't touch terraform managed resources in vcenter 
+
 # Credits
 * sam (terraform and packer template)
 * monolithprojects.github_actions_runner (git runner role)
