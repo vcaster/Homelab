@@ -8,7 +8,7 @@ on:
       - 'Ansible/Commander/**'
       - '.github/workflows/Commander.yml'
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '0 */3 * * *' #every 3 hours
   workflow_dispatch:
 
 permissions:

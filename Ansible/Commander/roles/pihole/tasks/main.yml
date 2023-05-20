@@ -1,0 +1,6 @@
+- name: Update pihole cron
+  cron:
+    name: "Update pihole"
+    minute: "0"
+    hour: "0" # midnight
+    job: "/usr/local/bin/pihole -up"
