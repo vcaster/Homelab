@@ -1,0 +1,30 @@
+- name: get nfs-common package
+  package:
+    name: nfs-common
+    state: present
+  ignore_errors: yes
+  tags: backup
+
+- name: Mount GenBackup NFS volume
+  ansible.posix.mount:
+    src: nas.patron.boss:/mnt/SidePool/GenBackup
+    path: /mnt/GenBackup
+    opts: 
+    state: mounted
+    fstype: nfs4
+  tags: backup
+
+- name: copy postgres backup script
+  template: 
+    src: psql-bak.sh
+    dest: /opt/psql-bak.sh
+    mode: 0655
+  tags: backup
+
+- name: backup cron
+  cron:
+    name: "backup postgres"
+    minute: "0"
+    hour: "4" # 4am
+    job: "/opt/psql-bak.sh"
+  tags: backup

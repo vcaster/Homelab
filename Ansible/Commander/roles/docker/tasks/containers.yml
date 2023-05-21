@@ -1,0 +1,28 @@
+- name: Create uptime kuma container
+  docker_container:
+    name: uptime-kuma
+    image: louislam/uptime-kuma:latest
+    state: started
+    recreate: false
+    restart_policy: always
+    published_ports:
+      - "3001:3001"
+    volumes:
+      - /docker-data/uptime-kuma/data:/app/data 
+  tags: docker, uptime_kuma
+
+- name: Create postgres container
+  docker_container:
+    name: postgres
+    image: postgres
+    state: started
+    recreate: false
+    restart_policy: always
+    published_ports:
+      - "5432:5432"
+    volumes:
+      - /docker-data/postgres/data:/var/lib/postgresql/data
+    env:
+        POSTGRES_USER: "{{ postgres_user }}"
+        POSTGRES_PASSWORD: "{{ postgres_password}}"
+  tags: docker, postgres

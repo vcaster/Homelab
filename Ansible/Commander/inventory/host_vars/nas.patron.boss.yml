@@ -1,0 +1,4 @@
+ansible_user: root
+host_hostname: nas.patron.boss
+host_name: nas
+taggies: ""

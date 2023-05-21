@@ -55,6 +55,11 @@ kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-oper
 * sanity check (edit zabbix active) agent.ping as passive (zabbix agent)
 * setup auto registration with hostmetadata (see ansible)
 
+# Longhorn
+
+* create a nfs share with nobody as its user (OPEN -> acl)
+* may mess things up with kubernetes
+
 # Maintenance
 
 * drain node 
