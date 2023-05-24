@@ -1,0 +1,7 @@
+- name: restart syncthing
+  systemd:
+    name: syncthing
+    state: restarted
+    daemon_reload: true
+    enabled: yes
+  tags: syncthing

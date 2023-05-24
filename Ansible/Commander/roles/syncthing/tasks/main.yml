@@ -1,0 +1,47 @@
+# - name: Set vars when architecture is armv6l
+#   set_fact:
+#     arch: "arm"
+#   when: ansible_facts.architecture == 'armv6l'
+#   tags: syncthing
+
+- name: Set vars when architecture is x86_64
+  set_fact:
+    arch: "amd64"
+  when: ansible_facts.architecture == 'x86_64'
+  tags: syncthing
+
+- name: download syncthing exec
+  unarchive:
+    src: https://github.com/syncthing/syncthing/releases/download/v1.23.4/syncthing-linux-{{ arch }}-v1.23.4.tar.gz
+    dest: /tmp
+    remote_src: yes
+  when: ansible_facts.architecture == 'x86_64'
+  tags: syncthing
+
+- name: move syncthing exec
+  shell: mv /tmp/syncthing-linux-{{ arch }}-v1.23.4/syncthing /usr/local/bin/syncthing
+  when: ansible_facts.architecture == 'x86_64'
+  tags: syncthing
+
+- name: create syncthing unit file
+  copy: 
+    src: syncthing.service
+    dest: /lib/systemd/system/syncthing.service 
+    mode: 0644
+  tags: syncthing
+
+- name: restart syncthing
+  systemd:
+    name: syncthing
+    state: restarted
+    daemon_reload: true
+    enabled: yes
+  tags: syncthing
+
+- name: allow external access
+  replace: 
+    path: ~/.config/syncthing/config.xml
+    regexp: '127\.0\.0\.1'
+    replace: '0.0.0.0'
+  notify: restart syncthing
+  tags: syncthing

@@ -18,6 +18,7 @@
 
   roles:
     - role: docker
+    - role: syncthing
 
 - name: configure pihole
   hosts: pihole
