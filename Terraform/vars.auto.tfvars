@@ -26,7 +26,7 @@ kubernetes = [
         name = "padre-01"
         cpus = 4
         cores_per_socket = 1
-        ram = 2048
+        ram = 4096
         disk_size = 100
         ip_addr = "10.10.5.1"
     },
