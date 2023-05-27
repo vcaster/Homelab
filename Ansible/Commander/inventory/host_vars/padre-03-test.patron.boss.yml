@@ -1,0 +1,4 @@
+ansible_user: ubuntu
+host_hostname: padre-03-test.patron.boss
+host_name: padre-03-test
+taggies: ""

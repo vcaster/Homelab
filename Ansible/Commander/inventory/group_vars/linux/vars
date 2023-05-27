@@ -17,6 +17,7 @@ extra_packages:
   - terminator
   - screen
   - git
+  - zip
 
 # Docker
 docker_packages:
