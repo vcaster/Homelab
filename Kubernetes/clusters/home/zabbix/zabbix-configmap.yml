@@ -40,7 +40,7 @@ data:
       # -- Name of one secret for unified configuration of DB access
       unified_secret_name: zabbixdb-pguser-zabbix
       # -- automatically create secret if not already present (works only in combination with postgresql.enabled=true)
-      unified_secret_autocreate: true
+      unified_secret_autocreate: false
       #
       # If you do NOT want to use one unified secret for all settings, you can still set the credentials manually here.
       # These settings will be used for all components of this chart where it makes sense (zabbix server, postgresql,
@@ -48,24 +48,24 @@ data:
       # -- Address of database host - ignored if postgresql.enabled=true
       db_server_host: "zabbix-postgresql"
       # -- Port of database host - ignored if postgresql.enabled=true
-      db_server_port: "5432"
+      #db_server_port: "5432"
       # -- User of database
-      postgres_user: "zabbix"
+      #postgres_user: "zabbix"
       # -- Name of a secret used for Postgres Password, if set, it overrules the POSTGRES_PASSWORD value
       #postgres_password_secret: mysecret
       # -- Key of the secret used for Postgres Password, requires POSTGRES_PASSWORD_SECRET, defaults to password
       #postgres_password_secret_key: "password"
       # -- Password of database - ignored if postgres_password_secret is set
-      postgres_password: "zabbix"
+      #postgres_password: "zabbix"
       # -- Name of database
-      postgres_db: "zabbix"
+      #postgres_db: "zabbix"
 
     # **Zabbix Server** configurations
     zabbixserver:
       # -- Enables use of **Zabbix Server**
       enabled: true
       # -- Number of replicas of ``zabbixserver`` module
-      replicaCount: 1
+      replicaCount: 3
       # -- set permissive podAntiAffinity to spread replicas over cluster nodes if replicaCount>1
       pod_anti_affinity: true
       # -- optional set true open a port direct on node where zabbix server runs
@@ -141,7 +141,7 @@ data:
     # **PostgreSQL** configurations
     postgresql:
       # -- Create a database using Postgresql
-      enabled: true
+      enabled: false
       image:
         # -- Postgresql Docker image name: chose one of "postgres" or "timescale/timescaledb"
         repository: postgres
@@ -313,7 +313,7 @@ data:
       # -- Enables use of **Zabbix Web**
       enabled: true
       # -- Number of replicas of ``zabbixweb`` module
-      replicaCount: 1
+      replicaCount: 3
       # -- set permissive podAntiAffinity to spread replicas over cluster nodes if replicaCount>1
       pod_anti_affinity: true
       # -- Requests and limits of pod resources. See: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers)

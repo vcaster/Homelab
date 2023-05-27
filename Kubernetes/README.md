@@ -18,6 +18,7 @@
 # Secrets
 
 * secrets with sensitive files are stored in a different repo
+* ALWAYS REMOVE NEWLINES WHEN CONVERTING TO B64 `echo -n 'zabbix' | base64`
 * templates soon or never
 
 # Certs
@@ -54,6 +55,7 @@ kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-oper
 * * use load balancer IP for serverActive and ensure hostname match 
 * sanity check (edit zabbix active) agent.ping as passive (zabbix agent)
 * setup auto registration with hostmetadata (see ansible)
+* enable discovery on local network
 
 # Longhorn
 
