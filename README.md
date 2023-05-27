@@ -21,17 +21,19 @@
 * run whole `ansible-playbook main.yml`
 * run with tags `ansible-playbook main.yml --tags=docker --vault-password-file=vault_pass`
 * schedule auto run
+* restart zabbix-agent `ansible linux -m command -a 'sudo systemctl restart zabbix-agent' --vault-password-file=vault_pass`
 
 # Postgres
 * create database `CREATE DATABASE <dbname>;`
-* create user `CREATE USER <user> WITH ENCRYPTED PASSWORD <password>;`
+* create user `CREATE USER <user> WITH ENCRYPTED PASSWORD '<password>';`
 * grant user access `ALTER USER authelia WITH SUPERUSER;` ---scrap all to the right--`GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <user>;` && `GRANT ALL PRIVILEGES ON ALL TABLES IN  SCHEMA public TO <user>;`&& `ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO <user>;`
 * 
 * `\c <dbname>` switch db
 * `\dt` `\du`
 ## backup and restore
 
-* `docker container exec Authelia-PG /usr/bin/pg_dump -U authelia authelia > authelia_test.sql`
+* backup -> `docker container exec Authelia-PG /usr/bin/pg_dump -U authelia authelia > authelia_test.sql`
+* restore -> `psql -h zima -U <user> -d < script.sql` (make user and db available before hand)
 
 # Packer
 
