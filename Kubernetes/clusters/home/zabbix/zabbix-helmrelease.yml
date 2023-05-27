@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: zabbix
       version: 3.4.4
-  interval: 15m
+  interval: 5m
   timeout: 5m
   releaseName: zabbix # #
   valuesFrom:
