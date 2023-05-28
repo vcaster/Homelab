@@ -5,6 +5,7 @@
 # Debug
 
 * flux logs `flux logs --follow --level=error --all-namespaces`
+* `kubectl logs -n kube-system <podname>`
 
 # Ingress
 
@@ -56,6 +57,11 @@ kubectl apply --server-side -f https://raw.githubusercontent.com/prometheus-oper
 * sanity check (edit zabbix active) agent.ping as passive (zabbix agent)
 * setup auto registration with hostmetadata (see ansible)
 * enable discovery on local network
+* migrated postgres db to zima due to inconsistencies in pg kubernetes
+
+# DNS
+
+* `kubectl -n kube-system rollout restart deployment coredns`
 
 # Longhorn
 

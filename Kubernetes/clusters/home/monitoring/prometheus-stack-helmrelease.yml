@@ -11,7 +11,7 @@ spec:
         kind: HelmRepository
         name: prometheus-community
       version: 45.25.0 # latest
-  interval: 15m
+  interval: 5m
   timeout: 5m
   releaseName: kube-prometheus-stack
   valuesFrom:
