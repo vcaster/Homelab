@@ -217,7 +217,7 @@ data:
             cpu: 200m
             memory: 50Mi
           limits:
-            memory: 100Mi
+            memory: 200Mi
 
     prometheus:
       enabled: true
@@ -240,7 +240,7 @@ data:
             hosts:
               - prometheus.patron.boss
       prometheusSpec:
-        scrapeInterval: 30s
+        scrapeInterval: 29s
         evaluationInterval: 30s
         replicas: 1
         replicaExternalLabelName: "replica"
