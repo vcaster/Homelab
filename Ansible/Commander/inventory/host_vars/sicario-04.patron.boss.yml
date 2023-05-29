@@ -1,4 +1,4 @@
 ansible_user: ubuntu
-host_hostname: sicario-04.patron.boss
+host_hostname: sicario-04
 host_name: sicario-04
-taggies: ""
+taggies: "k3s"

@@ -1,20 +1,26 @@
 ---
 
 - name: update apt packages
-  when: ansible_os_family == "Debian"
   apt:
     update_cache: yes
     upgrade: dist
   ignore_errors: yes
   tags: essential
+  when:
+    - ansible_os_family == "Debian"
+    - ansible_date_time.hour|int >= 1
+    - ansible_date_time.hour|int <= 8
 
 - name: update yum packages
-  when: ansible_os_family == "Redhat"
   yum:
     name: "*"
     state: latest
   ignore_errors: yes
   tags: essential
+  when:
+    - ansible_os_family == "Redhat"
+    - ansible_date_time.hour|int >= 1
+    - ansible_date_time.hour|int <= 8
 
 - name: install extra packages
   package:
@@ -22,11 +28,16 @@
     state: present
   ignore_errors: yes
   tags: essential
+  when:
+    - ansible_date_time.hour|int >= 1
+    - ansible_date_time.hour|int <= 8
 
 - name: set hostname
   hostname:
     name: "{{ host_hostname }}"
-  when: taggies is not search("dns")
+  when: 
+    - taggies is not search("dns") 
+    - taggies is not search("k3s")
   tags: essential
 
 - name: replace hostname in /etc/hosts
@@ -37,5 +48,7 @@
     owner: root
     group: root
     mode: "0644"
-  when: taggies is not search("dns")
+  when: 
+    - taggies is not search("dns") 
+    - taggies is not search("k3s")
   tags: essential

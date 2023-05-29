@@ -1,4 +1,4 @@
 ansible_user: ubuntu
-host_hostname: padre-02.patron.boss
+host_hostname: padre-02
 host_name: padre-02
-taggies: ""
+taggies: "k3s"
