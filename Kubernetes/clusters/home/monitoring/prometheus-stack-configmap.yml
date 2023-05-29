@@ -280,7 +280,34 @@ data:
             scrape_interval: 30s
             static_configs:
             - targets: ['kube-tester.patron.boss:9100']
-
+          - job_name: padre-01
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['padre-01.patron.boss:9100']
+          - job_name: padre-02
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['padre-02.patron.boss:9100']
+          - job_name: padre-03
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['padre-03.patron.boss:9100']
+          - job_name: sicario-01
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['sicario-01.patron.boss:9100']
+          - job_name: sicario-02
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['sicario-02.patron.boss:9100']
+          - job_name: sicario-03
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['sicario-03.patron.boss:9100']
+          - job_name: sicario-04
+            scrape_interval: 30s
+            static_configs:
+            - targets: ['sicario-04.patron.boss:9100']
 
     thanosRuler:
       enabled: false
