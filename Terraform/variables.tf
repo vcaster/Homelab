@@ -166,3 +166,15 @@ variable "kubernetes" {
   }))
   description = "The name of the vSphere virtual machines and the hostname of the machine"
 }
+
+variable "kubernetes-test" {
+  type        = list(object({
+    name = string
+    cpus = number
+    cores_per_socket = number
+    ram = number
+    disk_size = number
+    ip_addr = string
+  }))
+  description = "The name of the vSphere virtual machines and the hostname of the machine"
+}
