@@ -9,3 +9,9 @@ resource "vsphere_folder" "Kubernetes" {
   path          = "Kubernetes"
   type          = "vm"
 }
+
+resource "vsphere_folder" "Kubernetes-test" {
+  datacenter_id = data.vsphere_datacenter.dc.id
+  path          = "Kubernetes-test"
+  type          = "vm"
+}
