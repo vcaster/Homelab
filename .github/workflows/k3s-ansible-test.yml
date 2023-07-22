@@ -1,0 +1,33 @@
+name: 'Deploy k3s Ansible'
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - '.github/workflows/k3s-ansible.yml'
+      - 'Ansible/k3s-ansible/inventory/my-test-cluster/**'
+  # pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ansible-install:
+    name: 'K3S setup'
+    runs-on: self-hosted
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure Agents
+        run: ansible-playbook site.yml -i inventory/my-test-cluster/hosts.ini --extra-vars="k3s_token=${{ secrets.K3S_TOKEN }} -e '@inventory/my-test-cluster/group_vars/test.yml'"
+        working-directory: ./Ansible/k3s-ansible
