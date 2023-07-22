@@ -29,5 +29,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure Agents
-        run: ansible-playbook site.yml -i inventory/my-test-cluster/hosts.ini --extra-vars="k3s_token=${{ secrets.K3S_TOKEN }} -e '@inventory/my-test-cluster/group_vars/test.yml'"
+        run: ansible-playbook site.yml -i inventory/my-test-cluster/hosts.ini --extra-vars="k3s_token=${{ secrets.K3S_TOKEN }}" -e '@inventory/my-test-cluster/group_vars/test.yml'
         working-directory: ./Ansible/k3s-ansible
