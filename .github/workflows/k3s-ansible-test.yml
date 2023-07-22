@@ -1,4 +1,4 @@
-name: 'Deploy k3s Ansible'
+name: 'Deploy k3s Test Ansible'
 
 on:
   push:
