@@ -26,7 +26,7 @@ kubernetes = [
         name = "padre-01"
         cpus = 4
         cores_per_socket = 1
-        ram = 4096
+        ram = 8192
         disk_size = 100
         ip_addr = "10.10.5.1"
     },
@@ -34,7 +34,7 @@ kubernetes = [
         name = "padre-02"
         cpus = 4
         cores_per_socket = 1
-        ram = 2048
+        ram = 8192
         disk_size = 100
         ip_addr = "10.10.5.2"
     },
@@ -42,7 +42,7 @@ kubernetes = [
         name = "padre-03"
         cpus = 4
         cores_per_socket = 1
-        ram = 2048
+        ram = 8192
         disk_size = 100
         ip_addr = "10.10.5.3"
     },
