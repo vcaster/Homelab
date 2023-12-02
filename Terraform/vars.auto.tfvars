@@ -21,6 +21,9 @@ ubuntu2204-server-template-name = "Ubuntu-2204-Template-100GB-Thin"
 gh-runner                = "gh-runner"
 gh-runner-ipv4_address   = "10.10.2.3"
 
+pi-hole-2                = "pi-hole-2"
+pi-hole-2-ipv4_address   = "10.10.69.2"
+
 kubernetes = [
     {
         name = "padre-01"

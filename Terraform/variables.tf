@@ -152,6 +152,20 @@ variable "gh-runner-ipv4_address" {
 }
 
 #================================#
+# VMware vSphere pi-hole-2       #
+#================================#
+
+variable "pi-hole-2" {
+  type        = string
+  description = "The name of the vSphere virtual machines and the hostname of the machine"
+}
+
+variable "pi-hole-2-ipv4_address" {
+  type = string
+  description = "ipv4 addresses for a vm"
+}
+
+#================================#
 # VMware vSphere kubernetes      #
 #================================#
 
